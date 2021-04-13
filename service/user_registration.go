@@ -11,7 +11,7 @@ var CRUD dao.CRUD
 
 // UserRegisterService 管理用户注册服务
 type UserRegisterService struct {
-	Username        string `form:"username" json:"username" binding:"required,min=5,max=30"`
+	Username        string `form:"username" json:"username" binding:"required,min=5,max=18"`
 	Password        string `form:"password" json:"password" binding:"required,min=8,max=16"`
 	ConfirmPassword string `form:"confirm_password" json:"confirm_password" binding:"required,min=8,max=16"`
 }

@@ -11,6 +11,7 @@ type Response struct {
 	Status int
 	Msg    string
 	Data   interface{}
+	Token  interface{}
 }
 
 func (user *User) SetPassword(password string) error {
