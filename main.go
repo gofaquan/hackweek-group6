@@ -9,6 +9,6 @@ import (
 func main() {
 	dao.InitDB()
 
-	//路由装载/
+	//路由装载
 	route.InitRouter()
 }
