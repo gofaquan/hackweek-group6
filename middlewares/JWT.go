@@ -13,12 +13,12 @@ import (
 var JwtKey = []byte(os.Getenv("JwtKey"))
 
 type MyClaims struct {
-	Username string `json:"username"`
+	Username interface{} `json:"username"`
 	jwt.StandardClaims
 }
 
 // 生成token
-func SetToken(username string) interface{} {
+func SetToken(username interface{}) interface{} {
 	expireTime := time.Now().Add(10 * time.Hour)
 	SetClaims := MyClaims{
 		username,
