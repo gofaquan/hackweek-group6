@@ -9,7 +9,7 @@ type User struct {
 
 type Response struct {
 	Status int
-	Msg    string
+	Msg    interface{}
 	Data   interface{}
 	Token  interface{}
 }

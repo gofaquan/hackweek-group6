@@ -19,6 +19,12 @@ func InitRouter() {
 		userRouter.PUT("/transformation", controller.ChangePw) //修改密码
 	}
 
+	tempRouter := r.Group("temp")
+	tempRouter.Use(middlewares.JwtToken())
+	{
+		tempRouter.GET("/:temperature", controller.Temperature)
+	}
+
 	if err := r.Run(":8080"); err != nil {
 		panic("server启动失败力")
 	}

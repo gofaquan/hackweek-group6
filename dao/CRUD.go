@@ -26,3 +26,9 @@ func (CRUD *CRUD) ChangePw(user *model.User, newPw string) error {
 	err := DB.Model(&model.User{}).Where("username = ?", user.Username).Update("password", newPw).Error
 	return err
 }
+
+func (CRUD *CRUD) CalcTemp(tempColor *model.Temperalor) *model.Temperalor {
+	var info model.Temperalor
+	DB.Model(&model.Temperalor{}).Where("temperature = ?", tempColor.Temperature).Find(&info)
+	return &info
+}

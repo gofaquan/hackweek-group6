@@ -17,6 +17,7 @@ func InitDB() {
 	}
 	err = DB.AutoMigrate(
 		&model.User{},
+		&model.Temperalor{},
 	)
 	if err != nil {
 		panic("模型迁移失败")
