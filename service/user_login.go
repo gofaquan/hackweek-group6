@@ -18,7 +18,6 @@ func (service *UserLoginService) Login() (*model.User, *model.Response) {
 		Password: service.Password,
 	}
 	if err := CRUD.UserLogin(&user); err != nil {
-
 		return nil, &model.Response{
 			Status: 1003,
 			Msg:    utils.GetErrMsg(1003), //用户不存在

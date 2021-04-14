@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-//管理用户注册
+// UserRegistration 管理用户注册
 func UserRegistration(c *gin.Context) {
 	var srv service.UserRegisterService
 	if err := c.ShouldBind(&srv); err == nil { //绑定JSON
@@ -27,7 +27,7 @@ func UserRegistration(c *gin.Context) {
 	}
 }
 
-//管理用户登录
+//UserLogin 管理用户登录
 func UserLogin(c *gin.Context) {
 	var srv service.UserLoginService
 	if err := c.ShouldBind(&srv); err == nil {
@@ -45,7 +45,7 @@ func UserLogin(c *gin.Context) {
 	}
 }
 
-//用户修改密码
+//ChangePw 用户修改密码
 func ChangePw(c *gin.Context) {
 	var srv service.ChangePwService
 	if err := c.ShouldBind(&srv); err == nil {

@@ -19,6 +19,7 @@ const (
 	ERROR_USER_FAIL        = 1012
 	ERROR_BOTH_WRONG       = 1013
 	ERROR_PASSWORD_EDFL    = 1014
+	ERROR_TEMP_EDFL        = 1015
 )
 
 var codeMsg = map[int]string{
@@ -38,6 +39,7 @@ var codeMsg = map[int]string{
 	ERROR_USER_FAIL:        "注册失败",
 	ERROR_BOTH_WRONG:       "帐号或密码错误",
 	ERROR_PASSWORD_EDFL:    "密码修改失败",
+	ERROR_TEMP_EDFL:        "上传失败",
 }
 
 func GetErrMsg(code int) string {

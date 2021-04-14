@@ -22,4 +22,5 @@ func InitDB() {
 	if err != nil {
 		panic("模型迁移失败")
 	}
+
 }

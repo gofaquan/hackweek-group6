@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	//初始化mysql
 	dao.InitDB()
 
 	//路由装载
