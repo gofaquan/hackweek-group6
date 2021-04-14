@@ -23,8 +23,10 @@ func InitRouter() {
 	tempRouter.Use(middlewares.JwtToken())
 	{
 		tempRouter.GET("/:temperature", controller.Temperature)
-		tempRouter.GET("/:temperature", controller.Temperature)
+
 	}
+
+	r.POST("/temp", controller.PostTemp)
 
 	if err := r.Run(":8080"); err != nil {
 		panic("server启动失败力")
