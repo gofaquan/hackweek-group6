@@ -2,27 +2,22 @@ package service
 
 import (
 	"github.com/kashimashino/hackweek-group6/model"
-	"github.com/kashimashino/hackweek-group6/utils"
 )
 
 type TempCalcService struct {
-	Temperature int `json:"temperature"`
+	Username string `json:"username"`
 }
 
-func (temp *TempCalcService) TempCalc() (string, *model.Response) {
+func (tpa *TempCalcService) TempCalc() ([]model.Temperalor, *model.Response) {
 	tempColor := &model.Temperalor{
-		Temperature: temp.Temperature,
+		Username: tpa.Username,
 	}
 	info := CRUD.CalcTemp(tempColor)
 	if info == nil {
-		return "", &model.Response{
+		return nil, &model.Response{
 			Status: 500,
-			Msg:    "获取图片失败",
+			Msg:    "你还没有发布过图片呢",
 		}
 	}
-	return "", &model.Response{
-		Status: 200,
-		Msg:    utils.GetErrMsg(200),
-		Data:   info.Url,
-	}
+	return *info, nil
 }

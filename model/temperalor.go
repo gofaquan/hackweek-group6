@@ -1,14 +1,14 @@
 package model
 
 type Temperalor struct {
-	Url         string
-	Temperature int
+	Username    string `json:"username"`
+	Url         string `json:"url"`
+	Temperature int    `json:"temperature"`
 }
 
-type PostPicture struct {
+type GetPicture struct {
 	Username string `json:"username"`
 	Url      string `json:"url"`
-	Time     string
 }
 
 type OssResponse struct {

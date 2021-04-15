@@ -20,9 +20,9 @@ func InitRouter() {
 	}
 
 	tempRouter := r.Group("temp")
-	tempRouter.Use(middlewares.JwtToken())
+	//tempRouter.Use(middlewares.JwtToken())
 	{
-		tempRouter.GET("/:temperature", controller.Temperature)
+		tempRouter.GET("/:username", controller.Temperature)
 		tempRouter.POST("/token", controller.StsToken)
 
 	}

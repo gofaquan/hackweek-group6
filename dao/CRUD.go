@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"fmt"
 	"github.com/kashimashino/hackweek-group6/model"
 )
 
@@ -27,13 +28,9 @@ func (CRUD *CRUD) ChangePw(user *model.User, newPw string) error {
 	return err
 }
 
-func (CRUD *CRUD) CalcTemp(tempColor *model.Temperalor) *model.Temperalor {
-	var info model.Temperalor
-	DB.Model(&model.Temperalor{}).Where("temperature = ?", tempColor.Temperature).Find(&info)
-	return &info
-}
-
-func (CRUD *CRUD) PostTemp(pp *model.PostPicture) error {
-	err := DB.Model(&model.PostPicture{}).Create(&pp).Error
-	return err
+func (CRUD *CRUD) CalcTemp(tempColor *model.Temperalor) *[]model.Temperalor {
+	var infos []model.Temperalor
+	DB.Model(&model.Temperalor{}).Where("username = ?", tempColor.Username).Find(&infos)
+	fmt.Println(infos)
+	return &infos
 }

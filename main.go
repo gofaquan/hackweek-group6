@@ -10,6 +10,7 @@ func main() {
 	//初始化mysql
 	dao.InitDB()
 
+	//dao.Test()
 	//路由装载
 	route.InitRouter()
 }
