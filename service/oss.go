@@ -12,7 +12,7 @@ func (oss *OssService) UploadToken() *model.OssResponse {
 
 	//构建一个阿里云客户端, 用于发起请求。
 	//构建阿里云客户端时，需要设置AccessKey ID和AccessKey Secret。
-	client, err := sts.NewClientWithAccessKey("cn-shenzhen", "LTAI5t86K6LPjU4x3wTTGMKj", "4b6upzrv91GnhBudYXnTQT49dAqlN9")
+	client, err := sts.NewClientWithAccessKey("faq", "faq", "faq")
 
 	//构建请求对象。
 	request := sts.CreateAssumeRoleRequest()
