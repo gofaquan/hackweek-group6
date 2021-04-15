@@ -59,3 +59,13 @@ func ChangePw(c *gin.Context) {
 		}
 	}
 }
+
+//StsToken 拿sts token
+func StsToken(c *gin.Context) {
+	var srv service.OssService
+	if data := srv.UploadToken(); data != nil {
+		c.JSON(http.StatusOK, data)
+	} else {
+		c.JSON(http.StatusBadRequest, data)
+	}
+}

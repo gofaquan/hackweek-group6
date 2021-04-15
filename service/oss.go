@@ -1,69 +1,38 @@
 package service
 
 import (
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
-	"github.com/google/uuid"
-	"mime"
-	"os"
-	"path/filepath"
+	"fmt"
+	"github.com/aliyun/alibaba-cloud-sdk-go/services/sts"
+	"github.com/kashimashino/hackweek-group6/model"
 )
 
-// UploadTokenService 获得上传oss token的服务
-type UploadTokenService struct {
-	Filename string `form:"filename" json:"filename"`
-}
+type OssService struct{}
 
-type Response struct {
-	Key   string `json:"key"`
-	Put   string `json:"put"`
-	Get   string `json:"get"`
-	Error string `json:"error"`
-}
+func (oss *OssService) UploadToken() *model.OssResponse {
 
-// Post 创建token
-func (service *UploadTokenService) Post() *Response {
-	client, err := oss.New(os.Getenv("OSS_END_POINT"), os.Getenv("OSS_ACCESS_KEY_ID"), os.Getenv("OSS_ACCESS_KEY_SECRET"))
+	//构建一个阿里云客户端, 用于发起请求。
+	//构建阿里云客户端时，需要设置AccessKey ID和AccessKey Secret。
+	client, err := sts.NewClientWithAccessKey("cn-shenzhen", "LTAI5t86K6LPjU4x3wTTGMKj", "4b6upzrv91GnhBudYXnTQT49dAqlN9")
+
+	//构建请求对象。
+	request := sts.CreateAssumeRoleRequest()
+	request.Scheme = "https"
+
+	//设置参数。关于参数含义和设置方法，请参见API参考。
+	request.RoleArn = "acs:ram::1011107079365118:role/guofaquan"
+	request.RoleSessionName = "guofaquan"
+
+	//发起请求，并得到响应。
+	response, err := client.AssumeRole(request)
 	if err != nil {
-		return &Response{
-			Error: err.Error(),
-		}
+		fmt.Printf("response is %#v\n", response.Credentials)
+		return &model.OssResponse{Error: err.Error()}
 	}
+	fmt.Printf("response is %#v\n", response.Credentials)
 
-	// 获取存储空间。
-	bucket, err := client.Bucket(os.Getenv("OSS_BUCKET"))
-	if err != nil {
-		return &Response{
-			Error: err.Error(),
-		}
-	}
-
-	// 获取扩展名
-	ext := filepath.Ext(service.Filename)
-
-	// 带可选参数的签名直传。
-	options := []oss.Option{
-		oss.ContentType(mime.TypeByExtension(ext)),
-	}
-
-	key := "upload/avatar/" + uuid.Must(uuid.NewRandom()).String() + ext
-	// 签名直传。
-	signedPutURL, err := bucket.SignURL(key, oss.HTTPPut, 600, options...)
-	if err != nil {
-		return &Response{
-			Error: err.Error(),
-		}
-	}
-	// 查看图片
-	signedGetURL, err := bucket.SignURL(key, oss.HTTPGet, 600)
-	if err != nil {
-		return &Response{
-			Error: err.Error(),
-		}
-	}
-
-	return &Response{
-		Key: key,
-		Put: signedPutURL,
-		Get: signedGetURL,
+	return &model.OssResponse{
+		AccessKeyId:     response.Credentials.AccessKeyId,
+		AccessKeySecret: response.Credentials.AccessKeySecret,
+		SecurityToken:   response.Credentials.SecurityToken,
 	}
 }
