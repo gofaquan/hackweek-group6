@@ -143,3 +143,31 @@
 		"msg" :  ""
 }
 ```
+
+### 2.1.2 生成随机图片
+
+- 请求路径：/temp/rand_picture 
+- 请求方法：GET    
+- 请求参数
+
+| 参数名         | 参数说明   | 备注           |
+| -------------- | ---------- | -------------- |
+
+
+- 响应参数
+- 响应数据
+
+```json
+{
+    	"status" : 200,
+	{
+    "Status": 200,
+    "Msg": null,
+    "Data": "https://gfq-oss.oss-cn-shenzhen.aliyuncs.com/upload/%E9%82%82%E9%80%85%E6%B8%A9%E5%BA%A6/Image%2011.png",
+    "Token": null,
+    "Month": 0,
+    "Day": 0
+}	"msg" :  ""
+}
+```
+
