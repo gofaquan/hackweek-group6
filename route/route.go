@@ -8,7 +8,7 @@ import (
 
 func InitRouter() {
 	r := gin.Default()
-	r.Use(middlewares.CORS())
+	r.Use(middlewares.CORS())  //加跨域中间件
 
 	r.POST("user/registration", controller.UserRegistration) //注册接口
 	r.POST("user/login", controller.UserLogin)               //登录接口
@@ -30,6 +30,7 @@ func InitRouter() {
 	}
 
 	if err := r.Run(":8080"); err != nil {
-		panic("server启动失败力")
+		panic("server启动失败")
 	}
 }
+///
