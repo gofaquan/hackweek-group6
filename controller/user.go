@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/kashimashino/hackweek-group6/middlewares"
 	"github.com/kashimashino/hackweek-group6/model"
@@ -49,6 +50,7 @@ func UserLogin(c *gin.Context) {
 func ChangePw(c *gin.Context) {
 	var srv service.ChangePwService
 	if err := c.ShouldBind(&srv); err == nil {
+		fmt.Println("------------------------")
 		if err := srv.ChangePW(); err != nil {
 			c.JSON(http.StatusBadRequest, err)
 		} else {
@@ -57,6 +59,8 @@ func ChangePw(c *gin.Context) {
 				Msg:    utils.GetErrMsg(200),
 			})
 		}
+	} else {
+		fmt.Println("-------------------------")
 	}
 }
 

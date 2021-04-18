@@ -20,9 +20,11 @@ func InitRouter() {
 	}
 
 	tempRouter := r.Group("temp")
-	//tempRouter.Use(middlewares.JwtToken())
+	tempRouter.Use(middlewares.JwtToken())
 	{
+		//获取图片
 		tempRouter.GET("/:username", controller.Temperature)
+		//获取sts token 供前端调用上传图片
 		tempRouter.POST("/token", controller.StsToken)
 
 	}

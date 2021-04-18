@@ -28,9 +28,10 @@ func (CRUD *CRUD) ChangePw(user *model.User, newPw string) error {
 	return err
 }
 
-func (CRUD *CRUD) CalcTemp(tempColor *model.Temperalor) *[]model.Temperalor {
+func (CRUD *CRUD) CalcTemp(tempColor *model.Temperalor) (*[]model.Temperalor, int64) {
 	var infos []model.Temperalor
-	DB.Model(&model.Temperalor{}).Where("username = ?", tempColor.Username).Find(&infos)
+	var count int64
+	DB.Model(&model.Temperalor{}).Where("username = ?", tempColor.Username).Find(&infos).Count(&count)
 	fmt.Println(infos)
-	return &infos
+	return &infos, count
 }

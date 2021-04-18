@@ -8,9 +8,9 @@ import (
 
 type ChangePwService struct {
 	User         model.User `json:"user"`
-	Password     string
-	NewPw        string `json:"new_pw" form:"new_pw" binding:"required,min=8,max=40"`
-	ConfirmNewPw string `json:"confirm_new_pw" form:"confirm_new_pw" binding:"required,min=8,max=40"`
+	Password     string     `json:"password"`
+	NewPw        string     `json:"new_pw" binding:"required,min=8,max=16"`
+	ConfirmNewPw string     `json:"confirm_new_pw"  binding:"required,min=8,max=16"`
 }
 
 func (service *ChangePwService) SetPassword(password string) error {
